@@ -11,11 +11,13 @@ participant Okta as okta #deepskyblue
 participant "Spring Back End" as back #springgreen
 database Database as db #darkorange
 
-group Performed once when back end starts
+autonumber stop
+group Performed only once as the back end starts
     back -> okta: Request for Okta public key
     okta -> back: Okta public key
 end
 
+autonumber
 user -> app: Open App
 app -> app: Check for access token
 note left: On initial load, there will be no access token
