@@ -40,6 +40,7 @@ group If access token is invalid
     app -> user: Authentication error
 end
 
+autonumber 11
 back -> db: SQL Query
 db -> back: Data
 back -> app: Response
