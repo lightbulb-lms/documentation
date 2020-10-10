@@ -22,7 +22,7 @@ jobs:
       uses: Timmy/plantuml-action@v1
       with:
           # These arguments go directly to the `plantuml` command. Output directory is relative to input. Reference: https://plantuml.com/command-line
-          args: '*.puml -o output/'
+          args: 'source/*.puml -o ../output/'
 
     - name: Commit & Push Changes
       run: |
