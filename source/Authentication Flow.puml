@@ -18,7 +18,7 @@ group Performed only once as the back end starts
 end
 
 autonumber
-user -> app: Open App
+user -> app: Testing integration
 app -> app: Check for access token
 note left: On initial load, there will be no access token
 
