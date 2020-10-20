@@ -23,8 +23,10 @@ app -> app: Check for access token
 note left: On initial load, there will be no access token
 
 group If there is no access token
-    app -> user: Browser redirect to Okta
-    user -> okta: User credentials
+    app -> user: Angular app serves Okta login boxes
+    user -> app: User credentials
+    app -> okta: User credentials + client credentials
+    okta -> okta: Validate client credentials
     okta -> okta: Validate user credentials
     okta -> app: Authorization code
     app -> okta: Authorization code + Client credentials
@@ -40,7 +42,7 @@ group If access token is invalid
     app -> user: Authentication error
 end
 
-autonumber 11
+autonumber 13
 back -> db: SQL Query
 db -> back: Data
 back -> app: Response
