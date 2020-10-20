@@ -1,0 +1,47 @@
+@startuml
+skinparam WrapWidth 200
+skinparam MaxMessageSize 200
+
+' hide "E" circle around all entities
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+package Okta <<Rectangle>> {
+    entity "**USER**" as u {
+        * ID: varchar
+        --
+        first_name: varchar
+        last_name: varchar
+        email_address: varchar
+    }
+    note right
+        Not an actual entity in Okta, but represented here for the purposes of system clarity
+    end note
+}
+
+package Database <<Database>> {
+    entity "**COURSE**" as c {
+        * ID: int
+        --
+        created_by: varchar <<FK: User>>
+    }
+
+    entity "**COURSE_MEMBERS**" as cm {
+        * COURSE_ID: int <<FK: COURSE>>
+        * USER_ID: varchar <<FK: USER>>
+        * MEMBER_TYPE: int
+    }
+
+
+    entity "**SYLLABUS**" as s {}
+    entity "**GRADE**" as g {}
+    entity "**QUIZ**" as q {}
+    entity "**ASSIGNMENT**" as a{}
+}
+
+cm ---> u
+cm ---> c
+c ---> u
+@enduml
