@@ -1,6 +1,6 @@
 @startuml
-skinparam WrapWidth 200
-skinparam MaxMessageSize 200
+skinparam WrapWidth 250
+skinparam MaxMessageSize 250
 
 ' hide "E" circle around all entities
 hide circle
@@ -10,11 +10,11 @@ skinparam linetype ortho
 
 package Okta <<Rectangle>> {
     entity "**USER**" as u {
-        * ID: varchar
+        * **ID**: varchar
         --
-        first_name: varchar
-        last_name: varchar
-        email_address: varchar
+        **first_name**: varchar
+        **last_name**: varchar
+        **email_address**: varchar
     }
     note right
         Not an actual entity in Okta, but represented here for the purposes of system clarity
@@ -23,25 +23,61 @@ package Okta <<Rectangle>> {
 
 package Database <<Database>> {
     entity "**COURSE**" as c {
-        * ID: int
+        * **ID**: int
         --
-        created_by: varchar <<FK: User>>
+
     }
 
-    entity "**COURSE_MEMBERS**" as cm {
-        * COURSE_ID: int <<FK: COURSE>>
-        * USER_ID: varchar <<FK: USER>>
-        * MEMBER_TYPE: int
+    entity "**COURSE_CONTENT**" as s {
+        * **ID**: int
+        --
+        **course_id**: int <<FK: COURSE>>
+        **content**: nvarchar(max)
     }
 
+    entity "**GRADE**" as g {
+        * **ID**: int
+        --
 
-    entity "**SYLLABUS**" as s {}
-    entity "**GRADE**" as g {}
-    entity "**QUIZ**" as q {}
-    entity "**ASSIGNMENT**" as a{}
+    }
+
+    entity "**QUIZ**" as q {
+        * **ID**: int
+        --
+        * **course_id** int <<FK: COURSE>>
+        * **due_duate** datetime
+        **number_of_attempts**: int
+        **title**: varchar(max)
+    }
+
+    entity "**QUIZ_QUESTION**" as qq {
+        * **ID**: int
+        --
+        * **quiz_id**: int <<FK: QUIZ>>
+        * **label**: nvarchar(max)
+        * **question_type**: varchar(max) ("MultipleChoice"/TrueFalse")
+        **truefalse_correct_answer**: char(1) ("1"/"0")
+        **sort_order**: int
+    }
+
+    entity "**QUIZ_ANSWER**" as qa {
+        * **ID**: int
+        --
+        * **label**: nvarchar(max)
+        * **question_id**: int <<FK: QUIZ_QUESTION>>
+        * **is_correct_answer**: char(1) ("1"/"0")
+        **sort_order**: int
+    }
+
+    entity "**ASSIGNMENT**" as a {
+        * **ID**: int
+        --
+        * **course_id** int <<FK: COURSE>>
+        * **due_date** datetime
+        **title**: varchar(max)
+    }
 }
 
-cm ---> u
-cm ---> c
-c ---> u
+'cm ---> u
+'cm ---> c
 @enduml
