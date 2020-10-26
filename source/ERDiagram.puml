@@ -44,7 +44,7 @@ package Database <<Database>> {
         * **last_update_date**: datetime2
         * **is_public**: char(1) ("1"/"0")
         **course_id**: int <<FK: COURSE>>
-        **content**: nvarchar
+        **content**: ntext
     }
 
     entity "**QUIZ**" as q {
@@ -61,7 +61,7 @@ package Database <<Database>> {
         * **id**: int
         --
         * **quiz_id**: int <<FK: QUIZ>>
-        * **label**: nvarchar
+        * **label**: ntext
         * **question_type**: varchar ("MultipleChoice"/TrueFalse")
         **truefalse_correct_answer**: char(1) ("1"/"0")
         **sort_order**: int
@@ -70,7 +70,7 @@ package Database <<Database>> {
     entity "**QUIZ_ANSWER**" as qa {
         * **id**: int
         --
-        * **label**: nvarchar
+        * **label**: ntext
         * **question_id**: int <<FK: QUIZ_QUESTION>>
         * **is_correct_answer**: char(1) ("1"/"0")
         **sort_order**: int
@@ -83,7 +83,7 @@ package Database <<Database>> {
         * **due_date** datetime
         * **allowed_submissions** int
         * **title**: varchar
-        **description**: nvarchar
+        **description**: ntext
     }
 
     entity "**ASSIGNMENT_SUBMISSION**" as as {
@@ -100,6 +100,8 @@ package Database <<Database>> {
         * **user_id**: varchar
         **quiz_id**: id <<FK: QUIZ>>
         **assignment_id**: id <<FK: ASSIGNMENT>>
+        --
+        **grade**: float
     }
 }
 
