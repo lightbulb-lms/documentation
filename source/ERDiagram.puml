@@ -1,7 +1,6 @@
 @startuml
 skinparam WrapWidth 250
 skinparam MaxMessageSize 250
-footer Generated on %date("MM-dd-YYYY")
 title Data Model
 
 ' hide "E" circle around all entities

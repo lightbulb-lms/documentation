@@ -2,7 +2,6 @@
 autonumber
 skinparam WrapWidth 150
 skinparam MaxMessageSize 150
-footer Generated on %date("MM-dd-YYYY")
 
 title Authentication Flow
 actor User as user
