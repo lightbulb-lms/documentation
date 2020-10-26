@@ -1,6 +1,8 @@
 @startuml
 skinparam WrapWidth 250
 skinparam MaxMessageSize 250
+footer Generated on %date("MM-dd-YYYY")
+title Data Model
 
 ' hide "E" circle around all entities
 hide circle
@@ -10,7 +12,7 @@ skinparam linetype ortho
 
 package Okta <<Rectangle>> {
     entity "**USER**" as u {
-        * **ID**: varchar
+        * **id**: varchar
         --
         **first_name**: varchar
         **last_name**: varchar
@@ -23,61 +25,95 @@ package Okta <<Rectangle>> {
 
 package Database <<Database>> {
     entity "**COURSE**" as c {
-        * **ID**: int
+        * **id**: int
         --
-
+        * **course_title**: varchar(max)
     }
 
-    entity "**COURSE_CONTENT**" as s {
-        * **ID**: int
+    entity "**COURSE_MEMBERS**" as cm {
+        * **id**: int
         --
+        * **course_id**: int <<FK: COURSE>>
+        * **user_id**: varchar
+        * **role**: varchar ("INSTRUCTOR", "STUDENT")
+    }
+
+    entity "**COURSE_CONTENT**" as cc {
+        * **id**: int
+        --
+        * **creation_date**: datetime2
+        * **last_update_date**: datetime2
+        * **is_public**: char(1) ("1"/"0")
         **course_id**: int <<FK: COURSE>>
-        **content**: nvarchar(max)
-    }
-
-    entity "**GRADE**" as g {
-        * **ID**: int
-        --
-
+        **content**: nvarchar
     }
 
     entity "**QUIZ**" as q {
-        * **ID**: int
+        * **id**: int
         --
         * **course_id** int <<FK: COURSE>>
         * **due_duate** datetime
+        * **last_update_date**: datetime2
         **number_of_attempts**: int
-        **title**: varchar(max)
+        **title**: varchar
     }
 
     entity "**QUIZ_QUESTION**" as qq {
-        * **ID**: int
+        * **id**: int
         --
         * **quiz_id**: int <<FK: QUIZ>>
-        * **label**: nvarchar(max)
-        * **question_type**: varchar(max) ("MultipleChoice"/TrueFalse")
+        * **label**: nvarchar
+        * **question_type**: varchar ("MultipleChoice"/TrueFalse")
         **truefalse_correct_answer**: char(1) ("1"/"0")
         **sort_order**: int
     }
 
     entity "**QUIZ_ANSWER**" as qa {
-        * **ID**: int
+        * **id**: int
         --
-        * **label**: nvarchar(max)
+        * **label**: nvarchar
         * **question_id**: int <<FK: QUIZ_QUESTION>>
         * **is_correct_answer**: char(1) ("1"/"0")
         **sort_order**: int
     }
 
     entity "**ASSIGNMENT**" as a {
-        * **ID**: int
+        * **id**: int
         --
         * **course_id** int <<FK: COURSE>>
         * **due_date** datetime
-        **title**: varchar(max)
+        * **allowed_submissions** int
+        * **title**: varchar
+        **description**: nvarchar
+    }
+
+    entity "**ASSIGNMENT_SUBMISSION**" as as {
+        * **id**: int
+        --
+        * **assignment_id** int <<FK: ASSIGNMENT>>
+        * **user_id** varchar
+    }
+    note left
+        Not finalized yet, since unsure of mechanism to submit assignments
+    end note
+
+    entity "**GRADE**" as g {
+        * **user_id**: varchar
+        **quiz_id**: id <<FK: QUIZ>>
+        **assignment_id**: id <<FK: ASSIGNMENT>>
     }
 }
 
-'cm ---> u
-'cm ---> c
+cm ---> u
+cm ---> c
+cc ---> c
+q ---> c
+qq ---> q
+qa ---> qq
+a ---> c
+as ---> a
+as ---> u
+g ---> u
+g ---> q
+g ---> a
 @enduml
