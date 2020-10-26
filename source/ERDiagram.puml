@@ -14,9 +14,10 @@ package Okta <<Rectangle>> {
     entity "**USER**" as u {
         * **id**: varchar
         --
-        **first_name**: varchar
-        **last_name**: varchar
-        **email_address**: varchar
+        * **user_type**: varchar ("ADMIN", "TEACHER", "STUDENT")
+        * **first_name**: varchar
+        * **last_name**: varchar
+        * **email_address**: varchar
     }
     note right
         Not an actual entity in Okta, but represented here for the purposes of system clarity
@@ -35,7 +36,6 @@ package Database <<Database>> {
         --
         * **course_id**: int <<FK: COURSE>>
         * **user_id**: varchar
-        * **role**: varchar ("INSTRUCTOR", "STUDENT")
     }
 
     entity "**COURSE_CONTENT**" as cc {
