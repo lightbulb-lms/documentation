@@ -27,7 +27,9 @@ package Database <<Database>> {
     entity "**COURSE**" as c {
         * **id**: int
         --
-        * **course_title**: varchar(max)
+        * **course_title**: varchar
+        * **description**: varchar
+        * **course_code**: varchar
     }
 
     entity "**COURSE_MEMBERS**" as cm {
