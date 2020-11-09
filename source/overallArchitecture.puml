@@ -1,0 +1,24 @@
+@startuml
+title Overall App Architecture
+skinparam componentStyle rectangle
+
+cloud "Azure" {
+[Spring Boot backend server] as be
+database "SQL Server Database" as db
+}
+
+cloud "Vercel" {
+[Front end app] as fe
+}
+
+cloud "Okta" {
+[Okta API] as oa
+[Login component] as lc
+}
+
+be <--> db
+fe --> be
+fe --> lc
+be --> oa
+
+@enduml
