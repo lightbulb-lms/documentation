@@ -16,9 +16,12 @@ cloud "Okta" {
 [Login component] as lc
 }
 
+actor User as u
+
 be <--> db
 fe --> be
 fe --> lc
 be --> oa
+u --right--> fe
 
 @enduml
