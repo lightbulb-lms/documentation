@@ -1,0 +1,13 @@
+@startuml
+skinparam WrapWidth 150
+title Usecase Diagram
+
+:Student: as s
+:Teacher: as t
+:Admin: as a
+
+a --> (Create Courses)
+a --> (Assign users to courses)
+
+s --> (View Courses)
+@enduml
