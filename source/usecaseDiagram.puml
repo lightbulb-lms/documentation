@@ -1,13 +1,23 @@
 @startuml
 skinparam WrapWidth 150
 title Usecase Diagram
-
 :Student: as s
-:Teacher: as t
 :Admin: as a
+:Teacher: as t
+a --> (Create new courses)
+a --> (Assign teachers to courses)
+a --> (Assign students to courses)
+t --> (View courses they're assigned to)
+t --> (Add content to the courses they're assigned to)
+s --> (View courses they're assigned to)
+s --> (View content in the courses)
 
-a --> (Create Courses)
-a --> (Assign users to courses)
 
-s --> (View Courses)
+'Admins can create courses
+'Admins can assign teachers to courses
+'Admins can assign students to courses
+'Teachers can view courses they're assigned to
+'Teachers can add content to courses they're assigned to
+'Students can view courses they're assigned to
+'Students can view content in the courses
 @enduml
