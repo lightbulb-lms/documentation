@@ -49,74 +49,9 @@ package Database <<Database>> {
         **content**: ntext
     }
 
-    entity "**QUIZ**" as q {
-        * **id**: int
-        --
-        * **course_id** int <<FK: COURSE>>
-        * **due_duate** datetime
-        * **last_update_date**: datetime2
-        **number_of_attempts**: int
-        **title**: varchar
-    }
-
-    entity "**QUIZ_QUESTION**" as qq {
-        * **id**: int
-        --
-        * **quiz_id**: int <<FK: QUIZ>>
-        * **label**: ntext
-        * **question_type**: varchar ("MultipleChoice"/TrueFalse")
-        **truefalse_correct_answer**: char(1) ("1"/"0")
-        **sort_order**: int
-    }
-
-    entity "**QUIZ_ANSWER**" as qa {
-        * **id**: int
-        --
-        * **label**: ntext
-        * **question_id**: int <<FK: QUIZ_QUESTION>>
-        * **is_correct_answer**: char(1) ("1"/"0")
-        **sort_order**: int
-    }
-
-    entity "**ASSIGNMENT**" as a {
-        * **id**: int
-        --
-        * **course_id** int <<FK: COURSE>>
-        * **due_date** datetime
-        * **allowed_submissions** int
-        * **title**: varchar
-        **description**: ntext
-    }
-
-    entity "**ASSIGNMENT_SUBMISSION**" as as {
-        * **id**: int
-        --
-        * **assignment_id** int <<FK: ASSIGNMENT>>
-        * **user_id** varchar
-    }
-    note left
-        Not finalized yet, since unsure of mechanism to submit assignments
-    end note
-
-    entity "**GRADE**" as g {
-        * **user_id**: varchar
-        **quiz_id**: id <<FK: QUIZ>>
-        **assignment_id**: id <<FK: ASSIGNMENT>>
-        --
-        **grade**: float
-    }
 }
 
 cm ---> u
 cm ---> c
 cc ---> c
-q ---> c
-qq ---> q
-qa ---> qq
-a ---> c
-as ---> a
-as ---> u
-g ---> u
-g ---> q
-g ---> a
 @enduml
