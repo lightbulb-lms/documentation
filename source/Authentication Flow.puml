@@ -13,7 +13,7 @@ database Database as db #darkorange
 autonumber stop
 group Performed only once as the back end starts
     back -> okta: Request for Okta public key
-    okta -> back: Okta public key
+    okta --> back: Okta public key
 end
 
 autonumber
@@ -27,23 +27,23 @@ group If there is no access token
     app -> okta: User credentials + client credentials
     okta -> okta: Validate client credentials
     okta -> okta: Validate user credentials
-    okta -> app: Authorization code
+    okta --> app: Authorization code
     app -> okta: Authorization code + Client credentials
     note right: Client credentials identify the angular app to the Okta
-    okta -> app: Access token
+    okta --> app: Access token
 end
 
 app -> back: Request with access token
 back -> back: Validate access token against Okta public key
 
 group If access token is invalid
-    back -> app: 403 forbidden response
-    app -> user: Authentication error
+    back --> app: 403 forbidden response
+    app --> user: Authentication error
 end
 
 autonumber 13
 back -> db: SQL Query
-db -> back: Data
-back -> app: Response
-app -> user: Home page with relevant data
+db --> back: Data
+back --> app: Response
+app --> user: Home page with relevant data
 @enduml
