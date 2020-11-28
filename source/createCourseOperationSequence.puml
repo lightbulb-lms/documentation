@@ -20,7 +20,7 @@ group If access token is invalid or user has insufficient permissions
     app --> user: Authentication error
 end
 
-autonumber 3
+autonumber 4
 back -> db: Create new course in database
 db --> back: Acknowledgement of course created
 back --> app: Acknowledgement of course created
