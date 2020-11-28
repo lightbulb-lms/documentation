@@ -11,11 +11,11 @@ database Database as db #darkorange
 
 autonumber
 user -> app: Create new course
-note left: Contains course title, course ID and description
 app -> back: Create course request with access token
-back -> back: Validate access token and role
+note left: Contains course title, course ID and description
+back -> back: Validate access token and user role
 
-group If access token is invalid or role has insufficient permissions
+group If access token is invalid or user has insufficient permissions
     back --> app: 403 forbidden response
     app --> user: Authentication error
 end
