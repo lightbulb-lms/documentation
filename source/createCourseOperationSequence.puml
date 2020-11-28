@@ -1,0 +1,28 @@
+@startuml
+autonumber
+skinparam WrapWidth 150
+skinparam MaxMessageSize 150
+
+title Create Course Flow
+actor "Admin User" as user
+participant "Angular App" as app #red
+participant "Spring Back End" as back #springgreen
+database Database as db #darkorange
+
+autonumber
+user -> app: Create new course
+note left: Contains course title, course ID and description
+app -> back: Create course request with access token
+back -> back: Validate access token and role
+
+group If access token is invalid or role has insufficient permissions
+    back --> app: 403 forbidden response
+    app --> user: Authentication error
+end
+
+autonumber 3
+back -> db: Create new course in database
+db --> back: Acknowledgement of course created
+back --> app: Acknowledgement of course created
+app --> user: Acknowledgement of course created
+@enduml
