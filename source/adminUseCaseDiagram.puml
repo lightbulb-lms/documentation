@@ -1,0 +1,12 @@
+@startuml
+skinparam WrapWidth 150
+title Usecase Diagram
+:Admin: as a
+a --> (Create new courses)
+a --> (Assign teachers to courses)
+a --> (Assign students to courses)
+
+'Admins can create courses
+'Admins can assign teachers to courses
+'Admins can assign students to courses
+@enduml
