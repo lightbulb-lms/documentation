@@ -1,0 +1,15 @@
+@startuml
+skinparam WrapWidth 150
+title Student/Teacher Usecase Diagram
+:Student: as s
+:Teacher: as t
+t --> (View courses they're assigned to)
+t --> (Add content to the courses they're assigned to)
+s --> (View courses they're assigned to)
+s --> (View content in the courses)
+
+'Teachers can view courses they're assigned to
+'Teachers can add content to courses they're assigned to
+'Students can view courses they're assigned to
+'Students can view content in the courses
+@enduml
