@@ -1,6 +1,6 @@
 @startuml
 skinparam WrapWidth 150
-title Usecase Diagram
+title Admin Usecase Diagram
 :Admin: as a
 a --> (Create new courses)
 a --> (Assign teachers to courses)
